@@ -30,6 +30,7 @@
 }
 .profile-image-wrapper img {
 	width: 100%;
+	/* height: 100%; */
 }
   
 .profile-content-wrapper {
