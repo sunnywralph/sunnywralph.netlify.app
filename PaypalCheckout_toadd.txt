@@ -1,0 +1,40 @@
+Paypal Checkout code : Add the code to your website:
+
+1. Open your website in a code editor view.
+2. Find the location in your code where you want the PayPal Checkout experience to show up. This should be near your product. Paste the code there.
+3. Make a purchase on your website to test the code.
+4. Check your PayPal account for the transaction.
+
+Also check this links-
+To setup API credentials -> https://developer.paypal.com/developer/applications/create?env=live
+To check paypal status-> https://www.paypal-status.com/product/production
+
+CODE:
+
+<div id="paypal-button-container"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
+<script>
+  paypal.Buttons({
+      style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'pay',
+          
+      },
+      createOrder: function(data, actions) {
+          return actions.order.create({
+              purchase_units: [{
+                  amount: {
+                      value: '1'
+                  }
+              }]
+          });
+      },
+      onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+              alert('Transaction completed by ' + details.payer.name.given_name + '!');
+          });
+      }
+  }).render('#paypal-button-container');
+</script>
